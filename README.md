@@ -12,7 +12,7 @@ npx create-expo-app --template
 
 https://play.google.com/store/apps/details?id=host.exp.exponent&pli=1
 
-2) Instalar o tunnel
+2) Instalar o tunnel (No caso do IF alterar o script start no package.json para o seguinte comando)
 
 ```
 expo start --tunnel
