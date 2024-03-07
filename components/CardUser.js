@@ -27,7 +27,8 @@ const styles = StyleSheet.create({
         height: 100,
         backgroundColor: '#FFF',
         borderRadius: 20,
-        marginVertical: 10
+        marginVertical: 10,
+        marginHorizontal: 10
     },
     avatar: {
         marginHorizontal: 10

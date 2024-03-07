@@ -20,18 +20,39 @@ const users = [
     name: "Manuel",
     email: "manuel@gmail.com",
     avatar:"https://avatars.githubusercontent.com/u/4061891?v=4"
-  }
+  },
+  {
+    id: 4,
+    name: "Camila",
+    email: "camila@gmail.com",
+    avatar:"https://avatars.githubusercontent.com/u/4061891?v=4"
+  },
+  {
+    id: 5,
+    name: "Renan Cavichi",
+    email: "renancavichi@gmail.com",
+    avatar:"https://avatars.githubusercontent.com/u/4259630?v=4"
+  },
+  {
+    id: 6,
+    name: "Maria",
+    email: "maria@gmail.com",
+    avatar:"https://avatars.githubusercontent.com/u/114303361?v=4"
+  },
 ]
 
 const Body = () => {
   return (
     <View style={styles.body}>
         <H1 style={styles.usuariosH1}>Usuários</H1>
-        <FlatList
-          data={users}
-          renderItem={({item}) => <CardUser user={item} />}
-          keyExtractor={item => item.id}
-        />
+        <View style={styles.listUser}>
+            <FlatList
+              data={users}
+              renderItem={({item}) => <CardUser user={item} />}
+              keyExtractor={item => item.id}
+              horizontal={true}
+            />
+        </View>
     </View>
   )
 }
@@ -46,6 +67,9 @@ const styles = StyleSheet.create({
     usuariosH1: {
       marginBottom: 20,
       color: "#FFF"
+    },
+    listUser:{
+      height: 120
     }
   }
 )
