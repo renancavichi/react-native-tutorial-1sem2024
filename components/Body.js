@@ -1,11 +1,13 @@
-import {View, StyleSheet, FlatList} from 'react-native'
+import {View, StyleSheet, FlatList, Text} from 'react-native'
 import { useEffect, useState } from 'react'
 import H1 from './ui/H1'
 import CardUser from './CardUser'
+import CardProduct from './CardProduct'
 
 const Body = () => {
 
   const [users, setUsers] = useState([])
+  const [products, setProducts] = useState([])
 
   const getUsers = async () => {
     try{
@@ -18,21 +20,46 @@ const Body = () => {
     }
   }
 
+  const getProducts = async () => {
+    try{
+      const result = await fetch('https://backend-api-express-1sem2024-rbd1.onrender.com/product')
+      const data = await result.json()
+      console.log(data.success)
+      setProducts(data.products)
+    } catch (error){
+      console.log(error.message)
+    }
+  }
+
   useEffect(()=>{
     getUsers()
+    getProducts()
   },[])
 
   return (
     <View style={styles.body}>
         <H1 style={styles.usuariosH1}>Usuários</H1>
         <View style={styles.listUser}>
-            <FlatList
-              data={users}
-              renderItem={({item}) => <CardUser user={item} />}
-              keyExtractor={item => item.id}
-              horizontal={true}
-            />
+            {users.length ? 
+              <FlatList
+                data={users}
+                renderItem={({item}) => <CardUser user={item} />}
+                keyExtractor={item => item.id}
+                horizontal={true}
+              /> : 
+              <Text style={{color: '#FFF'}}>Loading...</Text>}
         </View>
+        {
+          products.length ? 
+          <FlatList
+            data={products}
+            renderItem={({item}) => <CardProduct product={item} />}
+            keyExtractor={item => item.id}
+          />
+          :
+          <Text style={{color: '#FFF'}}>Loading...</Text>
+        }
+        
     </View>
   )
 }
