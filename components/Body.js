@@ -41,10 +41,13 @@ const Body = () => {
     try{
       const result = await fetch('https://backend-api-express-1sem2024-rbd1.onrender.com/user', {
         method: "POST",
+        headers:{
+          "Content-Type": "application/json"
+        },
         body: JSON.stringify({name: txtName, email: txtEmail, avatar: txtAvatar})
       })
       const data = await result.json()
-      console.log(data.success)
+      console.log(data)
       getUsers()
     } catch (error){
       console.log('Error postUser ' +error.message)
