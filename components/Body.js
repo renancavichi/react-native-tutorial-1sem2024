@@ -1,4 +1,4 @@
-import {View, StyleSheet, FlatList, Text} from 'react-native'
+import {View, StyleSheet, FlatList, Text, TextInput} from 'react-native'
 import Button from './ui/Button'
 import { useEffect, useState } from 'react'
 import H1 from './ui/H1'
@@ -7,32 +7,49 @@ import CardProduct from './CardProduct'
 
 const Body = () => {
 
+  const [txtName, setTxtName] = useState('')
+  const [txtEmail, setTxtEmail] = useState('')
+  const [txtAvatar, setTxtAvatar] = useState('')
+
   const [users, setUsers] = useState([])
   const [products, setProducts] = useState([])
   const [counter, setCounter] = useState(0)
 
-
   const getUsers = async () => {
     try{
-      const result = await fetch('https://backend-api-express-1sem2024-rbd1.onrender.com/user')
+      const result = await fetch('https://backend-api-express-1sem2024-rbd1.onrender.com/user?34')
       const data = await result.json()
       console.log(data.success)
       setUsers(data.users)
     } catch (error){
-      console.log(error.message)
+      console.log('Error getUsers ' + error.message)
     }
   }
 
   const getProducts = async () => {
     try{
-      const result = await fetch('https://backend-api-express-1sem2024-rbd1.onrender.com/product')
+      const result = await fetch('https://backend-api-express-1sem2024-rbd1.onrender.com/product?2')
       const data = await result.json()
       console.log(data.success)
       setProducts(data.products)
     } catch (error){
-      console.log(error.message)
+      console.log('Error getProducs ' + error.message)
     }
   }
+
+  const postUser = async () =>{
+    try{
+      const result = await fetch('https://backend-api-express-1sem2024-rbd1.onrender.com/user', {
+        method: "POST",
+        body: JSON.stringify({name: txtName, email: txtEmail, avatar: txtAvatar})
+      })
+      const data = await result.json()
+      console.log(data.success)
+      getUsers()
+    } catch (error){
+      console.log('Error postUser ' +error.message)
+    }
+  } 
 
   useEffect(()=>{
     getUsers()
@@ -41,6 +58,26 @@ const Body = () => {
 
   return (
     <View style={styles.body}>
+        <TextInput 
+          style={styles.input}
+          onChangeText={setTxtName}
+          value={txtName}
+        />
+        <TextInput 
+          style={styles.input}
+          onChangeText={setTxtEmail}
+          value={txtEmail}
+        />
+        <TextInput 
+          style={styles.input}
+          onChangeText={setTxtAvatar}
+          value={txtAvatar}
+        />
+        <Button 
+          title="Cadastrar Usuário"
+          onPress={postUser}
+        />
+
 
         <Button 
           title="Add +2"
@@ -91,7 +128,15 @@ const styles = StyleSheet.create({
     },
     listUser:{
       height: 120
-    }
+    },
+    input: {
+      height: 40,
+      width: 300,
+      backgroundColor: '#FFF',
+      margin: 12,
+      borderWidth: 1,
+      padding: 10,
+    },
   }
 )
 
