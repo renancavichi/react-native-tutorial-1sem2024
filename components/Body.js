@@ -1,4 +1,5 @@
 import {View, StyleSheet, FlatList, Text} from 'react-native'
+import Button from './ui/Button'
 import { useEffect, useState } from 'react'
 import H1 from './ui/H1'
 import CardUser from './CardUser'
@@ -8,6 +9,8 @@ const Body = () => {
 
   const [users, setUsers] = useState([])
   const [products, setProducts] = useState([])
+  const [counter, setCounter] = useState(0)
+
 
   const getUsers = async () => {
     try{
@@ -38,6 +41,17 @@ const Body = () => {
 
   return (
     <View style={styles.body}>
+
+        <Button 
+          title="Add +2"
+          onPress={() => setCounter(counter + 2)}
+        />
+        <Button 
+          title='Add +1'
+          onPress={() => setCounter(counter + 1)}
+        />
+        <Text style={{color: '#FFF'}}>Valor: {counter}</Text>
+
         <H1 style={styles.usuariosH1}>Usuários</H1>
         <View style={styles.listUser}>
             {users.length ? 
