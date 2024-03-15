@@ -50,7 +50,7 @@ const Body = () => {
       console.log(data)
       getUsers()
     } catch (error){
-      console.log('Error postUser ' +error.message)
+      console.log('Error postUser ' + error.message)
     }
   } 
 
