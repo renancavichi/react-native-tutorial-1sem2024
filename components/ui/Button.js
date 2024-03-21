@@ -15,14 +15,15 @@ const styles = StyleSheet.create({
         backgroundColor: "#345944",
         borderRadius: 20,
         paddingVertical: 8,
-        paddingHorizontal: 28
+        paddingHorizontal: 28,
       },
       tHButton: {
         borderRadius: 20,
         marginVertical: 8
       },
       textButton: {
-        color: '#FFF'
+        color: '#FFF',
+        textAlign: 'center'
       }
 })
 
