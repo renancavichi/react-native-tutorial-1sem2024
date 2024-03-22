@@ -1,12 +1,12 @@
-import { TouchableHighlight, View, Text, StyleSheet } from "react-native"
+import { Pressable, View, Text, StyleSheet } from "react-native"
 
 const Button = ({title, onPress}) => {
   return (
-    <TouchableHighlight style={styles.tHButton} onPress={onPress}>
+    <Pressable  style={styles.tHButton} onPress={onPress}>
         <View style={styles.customButton}>
             <Text style={styles.textButton}>{title}</Text>
         </View>
-    </TouchableHighlight>
+    </Pressable>
   )
 }
 

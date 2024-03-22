@@ -31,7 +31,6 @@ const Body = () => {
   return (
     <View style={{flex: 1}}>
         <View style={styles.titleAdd}>
-          <H1 style={styles.usuariosH1}>Users android</H1>
           <H1 style={styles.usuariosH1}>Users</H1>
           <Button title="Add User" onPress={() => navigation.navigate('Cadastrar', {users, setUsers})} />
         </View>
