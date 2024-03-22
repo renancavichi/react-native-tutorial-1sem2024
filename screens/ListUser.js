@@ -1,23 +1,19 @@
 import { StatusBar } from 'expo-status-bar'
 import { StyleSheet, View, ImageBackground, ScrollView} from 'react-native'
-import Header from '../components/Header'
-import Footer from '../components/Footer'
 import Body from '../components/Body'
 
 const ListUser = () => {
   return (
-    <ScrollView>
+    <View>
       <ImageBackground 
         resizeMode="cover"
         source={require('../assets/images/bg-mobile.jpg')}
         style={styles.bg}
       >
-        <Header />
         <Body />
-        <Footer />
       </ImageBackground>
       <StatusBar style="light" />
-    </ScrollView>
+    </View>
   );
 }
 
