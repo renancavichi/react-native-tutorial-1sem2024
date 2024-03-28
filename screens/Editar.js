@@ -86,6 +86,11 @@ const Editar = () => {
                   title="Remover Usuário"
                   onPress={removeUser}
               />
+
+              <Button 
+                  title="Products"
+                  onPress={() => navigation.navigate('Products')}
+              />
           </View>
       </ScrollView>
   )
