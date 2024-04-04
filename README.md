@@ -17,3 +17,24 @@ https://play.google.com/store/apps/details?id=host.exp.exponent&pli=1
 ```
 expo start --tunnel
 ```
+
+# Revisão
+
+ - Ambiente (Node.js)
+ - React
+ - React Native
+ - Crição de Um Projeto
+ - Expo / CLI
+ - Componentes
+ - Propriedades de Componentes
+    - Children
+    - Props
+ - Componentes Nativos Básicos (View, ScrollView, ImageBackground, FlatList, Text, StyleSheet, Image, Button, TextInput)
+ - Aplicação de Estilo
+ - Hooks
+    - useState
+    - useEffect
+ - Navegação com React Navigation
+    - Stack
+    - Tabs
+    - Drawer
