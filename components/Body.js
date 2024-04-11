@@ -1,15 +1,18 @@
 import {View, StyleSheet, FlatList, Text, Platform} from 'react-native'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import H1 from './ui/H1'
 import CardUser from './CardUser'
 import Button from './ui/Button'
 import { useNavigation } from '@react-navigation/native'
 import Header from './Header'
 import Footer from './Footer'
+import useUserStore from '../stores/userStore.js'
 
 const Body = () => {
-  const [users, setUsers] = useState([])
   const navigation = useNavigation()
+
+  const users = useUserStore((state) => state.users)
+  const setUsers = useUserStore((state) => state.setUsers)
 
   console.log('Plataforma Atual: ', Platform.OS)
 
@@ -32,7 +35,7 @@ const Body = () => {
     <View style={{flex: 1}}>
         <View style={styles.titleAdd}>
           <H1 style={styles.usuariosH1}>Users</H1>
-          <Button title="Add User" onPress={() => navigation.navigate('Cadastrar', {users, setUsers})} />
+          <Button title="Add User" onPress={() => navigation.navigate('Cadastrar')} />
         </View>
         
         <View style={styles.listUser}>

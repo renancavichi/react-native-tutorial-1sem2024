@@ -2,10 +2,13 @@ import {View, StyleSheet, ScrollView, TextInput} from 'react-native'
 import Button from '../components/ui/Button'
 import { useState } from 'react'
 import { useRoute, useNavigation } from '@react-navigation/native'
+import useUserStore from '../stores/userStore.js'
 
 const Editar = () => {
   const route = useRoute()
   const navigation = useNavigation()
+
+  const removeUserStore = useUserStore((state) => state.removeUser)
 
   const {user} = route.params
 
@@ -25,6 +28,7 @@ const Editar = () => {
         const data = await result.json()
         console.log(data)
         if(data?.success){
+          //update do user na store com o data.user
           navigation.goBack()
         } else {
           alert(data.error)
@@ -46,6 +50,7 @@ const Editar = () => {
         const data = await result.json()
         console.log(data)
         if(data?.success){
+          removeUserStore(user.id)
           navigation.goBack()
         } else {
           alert(data.error)

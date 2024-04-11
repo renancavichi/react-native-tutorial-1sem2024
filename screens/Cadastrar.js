@@ -3,13 +3,12 @@ import {View, TextInput, StyleSheet, ScrollView} from 'react-native'
 import Button from '../components/ui/Button'
 import { useNavigation, useRoute } from '@react-navigation/native'
 import H1 from '../components/ui/H1.js'
+import useUserStore from '../stores/userStore.js'
 
 const Cadastrar = () => {
     const navigation = useNavigation()
-    const route = useRoute()
-    //const {users, setUsers} = route.params
-    const users = []
-    const setUsers = () => {} 
+
+    const addUser = useUserStore((state) => state.addUser)
 
     const [txtName, setTxtName] = useState('')
     const [txtEmail, setTxtEmail] = useState('')
@@ -27,7 +26,7 @@ const Cadastrar = () => {
           const data = await result.json()
           console.log(data)
           if(data?.success){
-            setUsers([...users, data.user])
+            addUser(data.user)
             navigation.goBack()
           } else {
             alert(data.error)
