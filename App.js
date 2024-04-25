@@ -20,14 +20,6 @@ const UserNavigator = () => {
     <Stack.Navigator>
       <Stack.Screen name="Principal" component={ListUser} />
       <Stack.Screen
-        name="Cadastrar"
-        component={Cadastrar}
-        options={{
-          title: "Cadastrar User",
-          headerShown: false
-        }}
-      />
-      <Stack.Screen
         name="Editar"
         component={Editar}
         options={{
@@ -88,6 +80,13 @@ export default function App() {
         options={{
           headerShown: false
         }}
+        />
+        <Stack.Screen
+          name="Cadastrar"
+          component={Cadastrar}
+          options={{
+            title: "Cadastrar User"
+          }}
         />
         <Stack.Screen
           name="Main"

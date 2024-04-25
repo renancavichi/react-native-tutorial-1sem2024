@@ -15,7 +15,7 @@ const Splash = () => {
 
   return (
     <View style={styles.container}>
-      <Text>Carregando...</Text>
+      <Text>Splash - Carregando...</Text>
     </View>
   )
 }
