@@ -3,12 +3,14 @@ import Button from '../components/ui/Button'
 import { useState } from 'react'
 import { useRoute, useNavigation } from '@react-navigation/native'
 import useUserStore from '../stores/userStore.js'
+import useUserLoggedStore from '../stores/useUserLoggedStore.js'
 
 const Editar = () => {
   const route = useRoute()
   const navigation = useNavigation()
 
-  const removeUserStore = useUserStore((state) => state.removeUser)
+  const removeUserStore = useUserStore(state => state.removeUser)
+  const token = useUserLoggedStore(state => state.token)
 
   const {user} = route.params
 
@@ -21,7 +23,8 @@ const Editar = () => {
         const result = await fetch('https://backend-api-express-1sem2024-rbd1.onrender.com/user/'+user.id, {
           method: "PUT",
           headers:{
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + token
           },
           body: JSON.stringify({name: txtName, email: txtEmail, avatar: txtAvatar})
         })
@@ -44,7 +47,8 @@ const Editar = () => {
         const result = await fetch('https://backend-api-express-1sem2024-rbd1.onrender.com/user/'+user.id, {
           method: "DELETE",
           headers:{
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + token
           }
         })
         const data = await result.json()

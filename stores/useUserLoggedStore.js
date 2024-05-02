@@ -1,14 +1,16 @@
 import { create } from 'zustand'
 
 const useUserLoggedStore = create((set) => ({
+  id: null,
   nome: '',
   email: '',
   avatar: '',
   token: '',
   isLogged: false,
     
-  login: (nome, email, avatar, token) => set(() => ({ nome, email, avatar, token, isLogged: true })),
+  login: (user, token) => set(() => ({ ...user, token, isLogged: true })),
   logout: () => set(() => ({ 
+    id: null,
     nome: '',
     email: '',
     avatar: '',
@@ -17,4 +19,4 @@ const useUserLoggedStore = create((set) => ({
   }))
 }))
 
-export default useUserStore
+export default useUserLoggedStore

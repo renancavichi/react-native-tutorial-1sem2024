@@ -18,7 +18,12 @@ const Tab = createBottomTabNavigator()
 const UserNavigator = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Principal" component={ListUser} />
+      <Stack.Screen 
+        name="Principal"
+        component={ListUser}
+        options={{
+          headerShown: false
+        }} />
       <Stack.Screen
         name="Editar"
         component={Editar}
