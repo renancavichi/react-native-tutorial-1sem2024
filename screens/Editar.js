@@ -4,12 +4,14 @@ import { useState } from 'react'
 import { useRoute, useNavigation } from '@react-navigation/native'
 import useUserStore from '../stores/userStore.js'
 import useUserLoggedStore from '../stores/useUserLoggedStore.js'
+import authFetch from '../helpers/authFetch.js'
 
 const Editar = () => {
   const route = useRoute()
   const navigation = useNavigation()
 
   const removeUserStore = useUserStore(state => state.removeUser)
+  const updateUser = useUserStore(state => state.updateUser)
   const token = useUserLoggedStore(state => state.token)
 
   const {user} = route.params
@@ -20,37 +22,54 @@ const Editar = () => {
 
   const editUser = async () =>{
       try{
-        const result = await fetch('https://backend-api-express-1sem2024-rbd1.onrender.com/user/'+user.id, {
+        //const result = await authFetch('https://backend-api-express-1sem2024-rbd1.onrender.com/user/'+user.id, {
+        const result = await authFetch('http://localhost:3333/user/'+user.id, {
           method: "PUT",
           headers:{
-            "Content-Type": "application/json",
-            "Authorization": "Bearer " + token
+            "Content-Type": "application/json"
           },
           body: JSON.stringify({name: txtName, email: txtEmail, avatar: txtAvatar})
         })
+        if(!result.ok){
+          const dataError = await result.json()
+          if(dataError?.error && dataError?.code && dataError.code === "logout"){
+            alert('Sessão expirada!')
+            navigation.navigate('Login')
+            return
+          }
+        }
         const data = await result.json()
         console.log(data)
         if(data?.success){
           //update do user na store com o data.user
+          updateUser(data.user)
           navigation.goBack()
         } else {
           alert(data.error)
         }
       } catch (error){
-        console.log('Error postUser ' + error.message)
+        console.log('Error edit ' + error.message)
         alert(error.message)
       }
     } 
 
     const removeUser = async () =>{
       try{
-        const result = await fetch('https://backend-api-express-1sem2024-rbd1.onrender.com/user/'+user.id, {
+        //const result = await authFetch('https://backend-api-express-1sem2024-rbd1.onrender.com/user/'+user.id, {
+        const result = await authFetch('http://localhost:3333/user/'+user.id, {
           method: "DELETE",
           headers:{
-            "Content-Type": "application/json",
-            "Authorization": "Bearer " + token
+            "Content-Type": "application/json"
           }
         })
+        if(!result.ok){
+          const dataError = await result.json()
+          if(dataError?.error && dataError?.code && dataError.code === "logout"){
+            alert('Sessão expirada!')
+            navigation.navigate('Login')
+            return
+          }
+        }
         const data = await result.json()
         console.log(data)
         if(data?.success){

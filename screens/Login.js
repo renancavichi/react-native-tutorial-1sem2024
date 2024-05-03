@@ -18,7 +18,8 @@ const Login = () => {
 
   const handleLogin = async () => {
     try{
-      const response = await fetch('https://backend-api-express-1sem2024-rbd1.onrender.com/auth/login', {
+      //const response = await fetch('https://backend-api-express-1sem2024-rbd1.onrender.com/auth/login', {
+      const response = await fetch('http://localhost:3333/auth/login', {
         method: "POST",
         headers: {
           "Content-Type": "application/json"

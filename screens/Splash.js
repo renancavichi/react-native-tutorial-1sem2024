@@ -20,7 +20,6 @@ const Splash = () => {
           const user = data
           delete user.token
           login(user, token)
-          console.log(data)
           setTimeout(() => {
             navigation.navigate('Main')
           }, 2000)

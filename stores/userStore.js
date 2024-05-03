@@ -7,8 +7,8 @@ const useUserStore = create((set) => ({
   removeUser: (id) => set((state) => {
     const usersFiltrado = state.users.filter((user => user.id !== id))
     return {users: usersFiltrado}
-  })
-  //updateUser
+  }),
+  updateUser: (newUser) => set((state) => ({ users: state.users.map((user) => (user.id === newUser.id ? newUser : user))})),
 }))
 
 export default useUserStore
