@@ -12,7 +12,7 @@ const authFetch = async (url, options) => {
             ...(options?.headers ? options.headers : {}),
             "Authorization": "Bearer " + token}}
     const response = await fetch(url, allOptions)
-
+    const responseClone = response.clone()
     if(!response.ok){
         const data = await response.json()
         if(data?.error && data?.code && data.code === "expired-token"){
@@ -59,7 +59,7 @@ const authFetch = async (url, options) => {
             return await authFetch(url, options)
         }
     }  
-    return response
+    return responseClone
 }
 
 export default authFetch
